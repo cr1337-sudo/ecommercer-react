@@ -1,21 +1,32 @@
+import CartWidget from "../cartWidget/CartWidget";
+import ItemListContainer from "../itemListContainer/ItemListContainer";
 import "./navBar.scss";
 
 const NavBar = () => {
   return (
-    <nav className="navbar">
-      <section className="brand">React</section>
-      <ul className="items">
-        <li>
-          <a href="#">Home</a>
-        </li>
-        <li>
-          <a href="#">Section</a>
-        </li>
-        <li>
-          <a href="#">Etc</a>
-        </li>
-      </ul>
-    </nav>
+    <>
+      <nav className="navbar">
+        <section className="brand">React</section>
+        <ul className="items">
+          <li>
+            <a href="#">Home</a>
+          </li>
+          <li>
+            <a href="#">Section</a>
+          </li>
+          <li>
+            <a href="#">Etc</a>
+          </li>
+          <li>
+            <CartWidget />
+          </li>
+        </ul>
+      </nav>
+      <div className="main-container">
+    <h1>APP H1</h1>
+        <ItemListContainer />
+      </div>
+    </>
   );
 };
 

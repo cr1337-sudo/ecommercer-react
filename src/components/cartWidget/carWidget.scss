@@ -1,0 +1,8 @@
+.fa-cart-plus{
+  cursor: pointer;
+    padding: 8px;
+  &:hover{
+    border-radius: 8px;
+    background-color: gray;
+  }
+}
