@@ -22,10 +22,6 @@ const NavBar = () => {
           </li>
         </ul>
       </nav>
-      <div className="main-container">
-    <h1>APP H1</h1>
-        <ItemListContainer />
-      </div>
     </>
   );
 };
