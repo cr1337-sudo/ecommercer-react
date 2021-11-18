@@ -1,23 +1,37 @@
 import "./itemListContainer.scss";
-import ItemCount from "../itemCount/ItemCount.jsx";
 import data from "../../data.js";
-import {useState} from "react";
+import { useState, useEffect } from "react";
+import ItemList from "../itemList/ItemList";
 
 const ItemListContainer = () => {
-  const [cartItems, setCartItems] = useState([])
-  const onAdd = (value)=>{
+  const [cartItems, setCartItems] = useState([]);
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    // Simulación de fetch a una API
+    //
+    const fetchItems = () => {
+      //Sé que pedían promesas pero por comodidad prefiero utilizar async/await,
+      //y utilizar promesas en casos que una operación asíncrona requiera mucha más lógica
+      try {
+        setTimeout(() => setItems(data), [2000]);
+      } catch (e) {
+        console.log("Error al obtener los productos");
+      }
+    };
+    fetchItems();
+  }, [items]);
+
+  const onAdd = (value) => {
     setCartItems([
       {
-        [value.name]:value.value
-      }
-    ])
-  }
-  console.log(cartItems)
+        [value.name]: value.value,
+      },
+    ]);
+  };
   return (
-    <div className="items-container">
-      {data.map((item) => (
-        <ItemCount name={item.name} pic={item.pic} price={item.price} stock={item.stock} initial={item.initial} onAdd={onAdd} />
-      ))}
+    <div className="item-list-container">
+      <ItemList items={items} onAdd={onAdd} />
     </div>
   );
 };

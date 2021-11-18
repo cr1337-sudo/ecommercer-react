@@ -5,7 +5,7 @@ import Fab from "@mui/material/Fab";
 import Button from "@mui/material/Button";
 import { useRef } from "react";
 
-const ItemCount = ({ name, pic, price, stock, initial, onAdd }) => {
+const ItemCount = ({ title, stock, initial, onAdd }) => {
   const value = useRef(initial);
 
   const handleChange = (type) => {
@@ -17,23 +17,17 @@ const ItemCount = ({ name, pic, price, stock, initial, onAdd }) => {
       if (parseInt(value.current.value) > 1)
         value.current.value = parseInt(value.current.value - 1);
     }
+    console.log(value.current.value == stock - 1)
   };
 
   return (
-    <div class="item-card">
-      <section class="card-top">
-        <img src={pic} alt="" />
-      </section>
-      <section class="card-center">
-        <p class="name">{name}</p>
-        <p class="price">${price}</p>
-        <p class="stock">stock {stock}</p>
-      </section>
-      <section class="card-footer">
+    <div class="item-count-container">
+      <section class="item-count">
         <Fab
           color="primary"
           aria-label="add"
           sx={{ height: "40px", width: "40px" }}
+          disabled={value.current.value == stock-1 ? true : false}
           onClick={() => handleChange("+")}
         >
           <AddIcon />
@@ -41,9 +35,9 @@ const ItemCount = ({ name, pic, price, stock, initial, onAdd }) => {
 
         <input
           type="number"
-          name={name}
+          name={title}
           ref={value}
-    value={initial}
+          value={initial}
           max={stock}
           disabled
         />
@@ -57,7 +51,16 @@ const ItemCount = ({ name, pic, price, stock, initial, onAdd }) => {
         </Fab>
       </section>
       <section class="submit">
-    <Button variant="contained" disabled={value?.current.value == "0" || stock === 0} onClick={()=>onAdd(value.current)}>Add to Cart</Button>
+        <Button
+          variant="contained"
+          disabled={value?.current.value == "0" || stock === 0}
+          onClick={(e) => {
+            e.preventDefault();
+            onAdd(value.current);
+          }}
+        >
+          Add to Cart
+        </Button>
       </section>
     </div>
   );
